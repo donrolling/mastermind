@@ -33,9 +33,9 @@ namespace Engine
             var max = 5;
             var rand = _random.Next(0, max);
             //recurse until we get an unused color
-            if(usedColors.Contains(rand)){
-                return getRandomUnusedColor(usedColors);
-            }
+            // if(usedColors.Contains(rand)){
+            //     return getRandomUnusedColor(usedColors);
+            // }
             usedColors.Add(rand);
             return (CodeColors)rand;
         }

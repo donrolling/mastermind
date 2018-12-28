@@ -1,7 +1,11 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Engine;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Omu.ValueInjecter;
 using Test;
 
 namespace Tests
@@ -25,11 +29,41 @@ namespace Tests
             Assert.IsFalse(codeTester.AreEqual(a, b));
             //compare two that are the same
             var c = new Code();
-            c.One = a.One;
-            c.Two = a.Two;
-            c.Three = a.Three;
-            c.Four = a.Four;
+            c.InjectFrom(a);
             Assert.IsTrue(codeTester.AreEqual(a, c));
+        }
+
+        [TestMethod]
+        public void CompareResponses_GivenCorrectAnswer(){
+            var codeMaker = new CodeMaker();
+            var answer = codeMaker.Create();
+            var guess = new Code();
+            guess.InjectFrom(answer);
+            var codeTester = new CodeTester();
+            var response = codeTester.Test(guess, answer);
+            Assert.AreEqual(ResponseColors.Red, response.One);
+            Assert.AreEqual(ResponseColors.Red, response.Two);
+            Assert.AreEqual(ResponseColors.Red, response.Three);
+            Assert.AreEqual(ResponseColors.Red, response.Four);
+        }
+
+        [TestMethod]
+        public void CompareResponses_GivenAnswerWithTwoRedAndTwoWhite(){
+            var answer = new Code{ One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Purple, Four = CodeColors.Red };
+            var guess = new Code{ One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.White, Four = CodeColors.Yellow };
+            var codeTester = new CodeTester();
+            var response = codeTester.Test(guess, answer);
+            var responseColors = new List<ResponseColors>{
+                response.One,
+                response.Two,
+                response.Three,
+                response.Four
+            };
+            var delimiter = ", ";
+            var sb = String.Join(delimiter, responseColors);
+            File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_GivenAnswerWithTwoRedAndTwoWhite.txt"), sb);
+            Assert.AreEqual(2, responseColors.Where(a => a == ResponseColors.Red).Count(), "There should be 2 Red responses.");
+            Assert.AreEqual(2, responseColors.Where(a => a == ResponseColors.White).Count(), "There should be 2 White responses.");
         }
     }
 }
