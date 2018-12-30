@@ -17,14 +17,7 @@ namespace Tests
             //write it to a file, so I can read it
             var relativePath = "Output\\CreateNewCode.txt";
             var path = TestUtility.GetPath(relativePath);
-            File.WriteAllText(path, code.ToString());
-            //ensure no duplicates
-            Assert.AreNotEqual(code.One, code.Two);
-            Assert.AreNotEqual(code.One, code.Three);
-            Assert.AreNotEqual(code.One, code.Four);
-            Assert.AreNotEqual(code.Two, code.Three);
-            Assert.AreNotEqual(code.Two, code.Four);
-            Assert.AreNotEqual(code.Three, code.Four);
+            File.WriteAllText(path, code.ToString());            
         }
     }
 }

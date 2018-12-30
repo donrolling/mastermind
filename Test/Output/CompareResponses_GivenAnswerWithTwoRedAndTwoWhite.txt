@@ -1,1 +1,1 @@
-Red, Red, White, White
+Red, Red, None, None

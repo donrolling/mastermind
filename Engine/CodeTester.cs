@@ -69,33 +69,22 @@ namespace Engine
                     list.Add(ResponseColors.White);
                 }
             }
-
+            while(list.Count() < 4){
+                list.Add(ResponseColors.None);
+            }
             return list;
 		}
 
 		private static CodeResponse generateResponse(List<ResponseColors> list)
 		{
-			list.Shuffle();
-
+            list = list
+                    .OrderBy(x => (int) (x))
+                    .ToList();
 			var response = new CodeResponse();
-			var count = list.Count();
-
-			if (count > 0)
-			{
-				response.One = list[0];
-			}
-			if (count > 1)
-			{
-				response.Two = list[1];
-			}
-			if (count > 2)
-			{
-				response.Three = list[2];
-			}
-			if (count > 3)
-			{
-				response.Four = list[3];
-			}
+			response.One = list[0];
+			response.Two = list[1];
+			response.Three = list[2];
+			response.Four = list[3];
 
 			return response;
 		}

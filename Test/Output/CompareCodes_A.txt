@@ -1,1 +1,1 @@
-Green, Orange, Red, Yellow
+Yellow, Green, Yellow, Red
