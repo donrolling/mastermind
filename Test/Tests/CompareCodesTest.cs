@@ -48,9 +48,28 @@ namespace Tests
         }
 
         [TestMethod]
-        public void CompareResponses_GivenAnswerWithTwoRedAndTwoWhite(){
+        public void CompareResponses_GivenAnswerWithTwoRedAndTwoEmptyResponses(){
             var answer = new Code{ One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Purple, Four = CodeColors.Red };
             var guess = new Code{ One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.White, Four = CodeColors.Yellow };
+            var codeTester = new CodeTester();
+            var response = codeTester.Test(guess, answer);
+            var responseColors = new List<ResponseColors>{
+                response.One,
+                response.Two,
+                response.Three,
+                response.Four
+            };
+            var delimiter = ", ";
+            var sb = String.Join(delimiter, responseColors);
+            File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_GivenAnswerWithTwoRedAndTwoWhite.txt"), sb);
+            Assert.AreEqual(2, responseColors.Where(a => a == ResponseColors.Red).Count(), "There should be 2 Red responses.");
+            Assert.AreEqual(2, responseColors.Where(a => a == ResponseColors.None).Count(), "There should be 2 None responses.");
+        }
+
+        [TestMethod]
+        public void CompareResponses_GivenAnswerWithTwoRedAndTwoWhiteResponses(){
+            var answer = new Code{ One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Purple, Four = CodeColors.Red };
+            var guess = new Code{ One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Red, Four = CodeColors.Purple };
             var codeTester = new CodeTester();
             var response = codeTester.Test(guess, answer);
             var responseColors = new List<ResponseColors>{
