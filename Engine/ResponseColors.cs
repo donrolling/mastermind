@@ -1,9 +1,8 @@
-namespace Engine
-{
-    public enum ResponseColors
-    {
-        Red,
-        White,
-        None
-    }
+namespace Engine {
+
+	public enum ResponseColors {
+		Red,
+		White,
+		None
+	}
 }

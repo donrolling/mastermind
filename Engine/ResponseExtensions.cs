@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Engine {
+
 	public static class ResponseExtensions {
+
 		public static List<ResponseColors> ToColorList(this CodeResponse codeResponse) {
 			var responseColors = new List<ResponseColors>{
 				codeResponse.One,

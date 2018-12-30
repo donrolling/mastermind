@@ -1,9 +1,5 @@
-﻿using System;
+﻿namespace Engine {
 
-namespace Engine
-{
-    public class GameState
-    {
-
-    }
+	public class GameState {
+	}
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace Engine {
 
 	public class CodeResponse {
+
 		public List<ResponseColors> ResponseColorList {
 			get {
 				if (_responseColors != null) {
