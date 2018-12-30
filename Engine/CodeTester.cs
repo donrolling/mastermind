@@ -5,11 +5,11 @@ namespace Engine {
 
 	public class CodeTester {
 
-		public bool AreEqual(Code a, Code b) {
-			return a.One == b.One
-				&& a.Two == b.Two
-				&& a.Three == b.Three
-				&& a.Four == b.Four;
+		public bool AreEqual(Code guess, Code answer) {
+			return guess.One == answer.One
+				&& guess.Two == answer.Two
+				&& guess.Three == answer.Three
+				&& guess.Four == answer.Four;
 		}
 
 		public CodeResponse Test(Code guess, Code answer) {
