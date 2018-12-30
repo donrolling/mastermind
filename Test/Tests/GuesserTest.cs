@@ -25,8 +25,6 @@ namespace Tests {
 				if (response.CorrectGuess) {
 					hadCorrectGuess = true;
 					Assert.IsTrue(this.GameState.GameOver);
-				} else {
-					Assert.IsFalse(this.GameState.GameOver);
 				}
 			} while (!this.GameState.GameOver);
 			Assert.IsTrue(hadCorrectGuess, "The Guesser should have guessed correctly before the game is over, but has not.");

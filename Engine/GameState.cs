@@ -17,15 +17,13 @@ namespace Engine {
 		private Code _code;
 		private CodeMaker _codeMaker;
 		private CodeTester _codeTester;
-		private int _gamesToPlay;
-		private int _numberOfTurns;
+		private int _numberOfTurns = 12;//can be 12, 10 or 8
 
 		public GameState() {
 			this._codeMaker = new CodeMaker();
 			this._codeTester = new CodeTester();
 			this.Turns = new List<Turn>();
-			this._gamesToPlay = 10;//must be even - players decide this
-			this._numberOfTurns = 12;//can be 12, 10 or 8
+			//this._gamesToPlay = 10;//must be even - players decide this
 			this._code = this._codeMaker.Create();
 		}
 

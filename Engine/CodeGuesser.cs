@@ -14,10 +14,10 @@ namespace Engine {
 
 		private Code makeFirstGuess() {
 			return new Code {
-				One = CodeColors.Green,
-				Two = CodeColors.Green,
+				One = CodeColors.Red,
+				Two = CodeColors.Yellow,
 				Three = CodeColors.Green,
-				Four = CodeColors.Green
+				Four = CodeColors.White
 			};
 		}
 
