@@ -39,5 +39,15 @@ namespace Engine {
 			var delimiter = ", ";
 			return String.Join(delimiter, this.ResponseColorList);
 		}
+
+		public List<ResponseColors> ToColorList() {
+			var colors = new List<ResponseColors>{
+				this.One,
+				this.Two,
+				this.Three,
+				this.Four
+			};
+			return colors;
+		}
 	}
 }

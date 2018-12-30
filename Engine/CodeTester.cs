@@ -20,55 +20,31 @@ namespace Engine {
 
 		private static List<ResponseColors> generateListOfResponseColors(Code guess, Code answer) {
 			var list = new List<ResponseColors>();
-			var answerColors = new List<CodeColors>{
-				answer.One,
-				answer.Two,
-				answer.Three,
-				answer.Four
-			};
-			var guessColors = new List<CodeColors>{
-				guess.One,
-				guess.Two,
-				guess.Three,
-				guess.Four
-			};
+			var answerColors = answer.ToColorList();
+			var guessColors = guess.ToColorList();
 
-			if (guess.One == answer.One) {
-				list.Add(ResponseColors.Red);
-			} else {
-				//is maybe white?
-				if (answerColors.Contains(guess.One)) {
-					list.Add(ResponseColors.White);
-				}
-			}
-			if (guess.Two == answer.Two) {
-				list.Add(ResponseColors.Red);
-			} else {
-				//is maybe white?
-				if (answerColors.Contains(guess.Two)) {
-					list.Add(ResponseColors.White);
-				}
-			}
-			if (guess.Three == answer.Three) {
-				list.Add(ResponseColors.Red);
-			} else {
-				//is maybe white?
-				if (answerColors.Contains(guess.Three)) {
-					list.Add(ResponseColors.White);
-				}
-			}
-			if (guess.Four == answer.Four) {
-				list.Add(ResponseColors.Red);
-			} else {
-				//is maybe white?
-				if (answerColors.Contains(guess.Four)) {
-					list.Add(ResponseColors.White);
-				}
-			}
+			getResponse(guess.One, answer.One, list, answerColors);
+			getResponse(guess.Two, answer.Two, list, answerColors);
+			getResponse(guess.Three, answer.Three, list, answerColors);
+			getResponse(guess.Four, answer.Four, list, answerColors);
+
 			while (list.Count() < 4) {
 				list.Add(ResponseColors.None);
 			}
 			return list;
+		}
+
+		private static void getResponse(CodeColors guessColor, CodeColors answerColor, List<ResponseColors> list, List<CodeColors> answerColors) {
+			if (guessColor == answerColor) {
+				list.Add(ResponseColors.Red);
+			} else {
+				//is maybe white?
+				if (answerColors.Contains(guessColor)) {
+					list.Add(ResponseColors.White);
+				} else {
+					list.Add(ResponseColors.None);
+				}
+			}
 		}
 
 		private static CodeResponse generateResponse(List<ResponseColors> list) {
