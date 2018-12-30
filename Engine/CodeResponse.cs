@@ -1,9 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Engine {
 
 	public class CodeResponse {
+		private bool _correctGuessIsSet = false;
+		private bool _correctGuess = false;
+		public bool CorrectGuess {
+			get {
+				if (_correctGuessIsSet) {
+					return _correctGuess;
+				}
+				this._correctGuessIsSet = true;
+				this._correctGuess = this.ResponseColorList.Where(a => a == ResponseColors.Red).Count() == 4;
+				return this._correctGuess;
+			}
+		}
 
 		public List<ResponseColors> ResponseColorList {
 			get {
