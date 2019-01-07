@@ -83,11 +83,21 @@ namespace Tests {
 		}
 
 		[TestMethod]
-		public void CompareResponses_RedsShouldBeReturnedFirstThenWhitesThenNones() {
+		public void CompareResponses_DoesNotReturnMultipleCorrectHitsOnASingularGuess() {
+			var answer = new Code { One = CodeColors.Green, Two = CodeColors.Green, Three = CodeColors.Purple, Four = CodeColors.Red };
+			var guess = new Code { One = CodeColors.Orange, Two = CodeColors.Yellow, Three = CodeColors.Green, Four = CodeColors.White };
+			var response = this.CodeTester.Test(guess, answer);
+			File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_DoesNotReturnMultipleCorrectHitsOnASingularGuess.txt"), response.ToString());
+			Assert.AreEqual(1, response.ResponseColorList.Where(a => a == ResponseColors.White).Count(), "There should be 1 White responses.");
+			Assert.AreEqual(3, response.ResponseColorList.Where(a => a == ResponseColors.None).Count(), "There should be 3 None responses.");
+		}
+
+		[TestMethod]
+		public void CompareResponses_ShouldReturnOneRedOneWhiteAndThenTwoNonesInThatOrder() {
 			var answer = new Code { One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Purple, Four = CodeColors.Red };
 			var guess = new Code { One = CodeColors.Green, Two = CodeColors.Red, Three = CodeColors.Yellow, Four = CodeColors.Yellow };
 			var response = this.CodeTester.Test(guess, answer);
-			File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_RedsShouldBeReturnedFirstThenWhitesThenNones.txt"), response.ToString());
+			File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_ShouldReturnOneRedOneWhiteAndThenTwoNonesInThatOrder.txt"), response.ToString());
 			Assert.AreEqual(1, response.ResponseColorList.Where(a => a == ResponseColors.Red).Count(), "There should be 1 Red responses.");
 			Assert.AreEqual(1, response.ResponseColorList.Where(a => a == ResponseColors.White).Count(), "There should be 1 White responses.");
 			Assert.AreEqual(2, response.ResponseColorList.Where(a => a == ResponseColors.None).Count(), "There should be 2 None responses.");
