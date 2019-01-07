@@ -8,8 +8,15 @@ namespace Engine {
 		public CodeColors Three { get; set; }
 		public CodeColors Two { get; set; }
 
-		public override string ToString() {
-			return $"{ One }, { Two }, { Three }, { Four }";
+		public Code() {
+
+		}
+
+		public Code(List<CodeColors> colors) {
+			this.One = colors[0];
+			this.Two = colors[1];
+			this.Three = colors[2];
+			this.Four = colors[3];
 		}
 
 		public List<CodeColors> ToColorList() {
@@ -20,6 +27,10 @@ namespace Engine {
 				this.Four
 			};
 			return colors;
+		}
+
+		public override string ToString() {
+			return $"{ One }, { Two }, { Three }, { Four }";
 		}
 	}
 }
