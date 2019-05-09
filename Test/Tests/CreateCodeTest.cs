@@ -1,4 +1,5 @@
 using Engine;
+using Engine.Service;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using Test;
@@ -10,8 +11,7 @@ namespace Tests {
 
 		[TestMethod]
 		public void CreateNewCode() {
-			var codeMaker = new CodeMaker();
-			var code = codeMaker.Create();
+			var code = CodeMaker.Create();
 			Assert.IsNotNull(code);
 			//write it to a file, so I can read it
 			var relativePath = "Output\\CreateNewCode.txt";

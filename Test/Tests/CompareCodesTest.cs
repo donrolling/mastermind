@@ -11,18 +11,12 @@ namespace Tests {
 
 	[TestClass]
 	public class CompareCodesTest {
-		public CodeMaker CodeMaker { get; private set; }
-
-		public CompareCodesTest() {
-			this.CodeMaker = new CodeMaker();
-		}
-
 		[TestMethod]
 		public void CompareCodes() {
-			var a = this.CodeMaker.Create();
+			var a = CodeMaker.Create();
 			var aCode = a.ToString();
 			File.WriteAllText(TestUtility.GetPath("Output\\CompareCodes_A.txt"), aCode);
-			var b = this.CodeMaker.Create();
+			var b = CodeMaker.Create();
 			var bCode = b.ToString();
 			File.WriteAllText(TestUtility.GetPath("Output\\CompareCodes_B.txt"), bCode);
 			//compare them as strings so that we know they aren't the same
@@ -71,7 +65,7 @@ namespace Tests {
 
 		[TestMethod]
 		public void CompareResponses_GivenCorrectAnswer() {
-			var answer = this.CodeMaker.Create();
+			var answer = CodeMaker.Create();
 			var guess = new Code();
 			guess.InjectFrom(answer);
 

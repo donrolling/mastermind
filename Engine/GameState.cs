@@ -17,14 +17,12 @@ namespace Engine {
 		public List<Turn> Turns;
 		
 		private Code _code;
-		private CodeMaker _codeMaker;
 		private int _numberOfTurns = 12;//can be 12, 10 or 8
 
 		public GameState() {
-			this._codeMaker = new CodeMaker();
 			this.Turns = new List<Turn>();
 			//this._gamesToPlay = 10;//must be even - players decide this
-			this._code = this._codeMaker.Create();
+			this._code = CodeMaker.Create();
 		}
 
 		public GameState(Code code) : this() {
