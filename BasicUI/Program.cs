@@ -1,4 +1,6 @@
 ﻿using Engine;
+using Engine.Factory;
+using Engine.Model;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -40,7 +42,7 @@ namespace BasicUI {
 						return null;
 				}
 			}
-			return new Code(colors);
+            return CodeFactory.Create(colors);
 		}
 
 		private static void play() {

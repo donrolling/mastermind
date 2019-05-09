@@ -1,3 +1,5 @@
+using Engine.Factory;
+using Engine.Model;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,8 +22,8 @@ namespace Engine {
 
 		private static List<ResponseColors> generateListOfResponseColors(Code guess, Code answer) {
 			var list = new List<ResponseColors>();
-			var answerColors = answer.ToColorList();
-			var guessColors = guess.ToColorList();
+			var answerColors = CodeFactory.ToColorList(answer);
+			var guessColors = CodeFactory.ToColorList(guess);
 
 			getResponse(guess.One, answer.One, list, answerColors);
 			getResponse(guess.Two, answer.Two, list, answerColors);
