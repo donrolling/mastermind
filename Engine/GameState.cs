@@ -1,4 +1,5 @@
 ﻿using Engine.Model;
+using Engine.Service;
 using System.Collections.Generic;
 
 namespace Engine {
@@ -17,12 +18,10 @@ namespace Engine {
 		
 		private Code _code;
 		private CodeMaker _codeMaker;
-		private CodeTester _codeTester;
 		private int _numberOfTurns = 12;//can be 12, 10 or 8
 
 		public GameState() {
 			this._codeMaker = new CodeMaker();
-			this._codeTester = new CodeTester();
 			this.Turns = new List<Turn>();
 			//this._gamesToPlay = 10;//must be even - players decide this
 			this._code = this._codeMaker.Create();
@@ -36,7 +35,7 @@ namespace Engine {
 			if (this.Turns.Count >= this._numberOfTurns) {
 				throw new System.Exception(getGameOverMessage());
 			}
-			var response = this._codeTester.Test(guess, this._code);
+			var response = CodeTester.Test(guess, this._code);
 			this.Turns.Add(new Turn { Code = guess, CodeResponse = response });
 			if (response.CorrectGuess) {
 				this.CodeBroken = true;

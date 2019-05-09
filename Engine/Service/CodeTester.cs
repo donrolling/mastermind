@@ -3,18 +3,18 @@ using Engine.Model;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Engine {
+namespace Engine.Service {
 
-	public class CodeTester {
+	public static class CodeTester {
 
-		public bool AreEqual(Code guess, Code answer) {
+		public static bool AreEqual(Code guess, Code answer) {
 			return guess.One == answer.One
 				&& guess.Two == answer.Two
 				&& guess.Three == answer.Three
 				&& guess.Four == answer.Four;
 		}
 
-		public CodeResponse Test(Code guess, Code answer) {
+		public static CodeResponse Test(Code guess, Code answer) {
 			var list = generateListOfResponseColors(guess, answer);
 			var response = generateResponse(list);
 			return response;
