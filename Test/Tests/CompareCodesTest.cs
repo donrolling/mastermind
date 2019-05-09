@@ -15,10 +15,10 @@ namespace Tests {
 		[TestMethod]
 		public void CompareCodes() {
 			var a = CodeMaker.Create();
-			var aCode = a.ToString();
+			var aCode = CodeFactory.ToString(a);
 			File.WriteAllText(TestUtility.GetPath("Output\\CompareCodes_A.txt"), aCode);
 			var b = CodeMaker.Create();
-			var bCode = b.ToString();
+			var bCode = CodeFactory.ToString(b);
 			File.WriteAllText(TestUtility.GetPath("Output\\CompareCodes_B.txt"), bCode);
 			//compare them as strings so that we know they aren't the same
 			Assert.AreNotEqual(aCode, bCode);
