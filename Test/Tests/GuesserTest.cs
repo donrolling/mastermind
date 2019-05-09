@@ -1,4 +1,6 @@
 ﻿using Engine;
+using Engine.Model;
+using Engine.Service;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests {

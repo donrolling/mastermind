@@ -1,7 +1,7 @@
 using Engine.Model;
 using System;
 
-namespace Engine {
+namespace Engine.Service {
 
 	public class CodeGuesser {
 

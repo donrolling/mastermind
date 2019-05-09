@@ -1,4 +1,5 @@
 ﻿using Engine;
+using Engine.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests {
