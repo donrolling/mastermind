@@ -1,4 +1,5 @@
 ﻿using Engine;
+using Engine.Factory;
 using Engine.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -38,13 +39,13 @@ namespace Tests {
 			var correctGuess = new Code { One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Purple, Four = CodeColors.Purple };
 			var response = gameState.Guess(correctGuess);
 			Assert.IsTrue(gameState.CodeBroken, "This should have been a correct guess.");
-			Assert.IsTrue(response.CorrectGuess, "This should have been a correct guess.");
+			Assert.IsTrue(CodeResponseFactory.CorrectGuess(response), "This should have been a correct guess.");
 		}
 
 		private static void makeGuess(GameState gameState, Code guess) {
 			var response = gameState.Guess(guess);
 			Assert.IsFalse(gameState.CodeBroken, "This should not have been a correct guess.");
-			Assert.IsFalse(response.CorrectGuess, "This should not have been a correct guess.");
+			Assert.IsFalse(CodeResponseFactory.CorrectGuess(response), "This should not have been a correct guess.");
 		}
 	}
 }

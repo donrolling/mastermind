@@ -1,4 +1,5 @@
-﻿using Engine.Model;
+﻿using Engine.Factory;
+using Engine.Model;
 using Engine.Service;
 using System.Collections.Generic;
 
@@ -35,7 +36,7 @@ namespace Engine {
 			}
 			var response = CodeTester.Test(guess, this._code);
 			this.Turns.Add(new Turn { Code = guess, CodeResponse = response });
-			if (response.CorrectGuess) {
+			if (CodeResponseFactory.CorrectGuess(response)) {
 				this.CodeBroken = true;
 				this.GameOver = true;
 			}

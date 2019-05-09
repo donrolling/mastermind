@@ -1,4 +1,5 @@
 ﻿using Engine;
+using Engine.Factory;
 using Engine.Model;
 using Engine.Service;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -24,7 +25,7 @@ namespace Tests {
 			do {
 				var guess = this.Guesser.MakeGuess(this.GameState);
 				var response = this.GameState.Guess(guess);
-				if (response.CorrectGuess) {
+				if (CodeResponseFactory.CorrectGuess(response)) {
 					hadCorrectGuess = true;
 					Assert.IsTrue(this.GameState.GameOver);
 				}

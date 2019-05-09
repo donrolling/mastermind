@@ -1,4 +1,5 @@
 using Engine;
+using Engine.Factory;
 using Engine.Model;
 using Engine.Service;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,10 +36,11 @@ namespace Tests {
 			var guess = new Code { One = CodeColors.Red, Two = CodeColors.Red, Three = CodeColors.Red, Four = CodeColors.Red };
 
 			var response = CodeTester.Test(guess, answer);
-			File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_AllNonesShouldBeReturned.txt"), response.ToString());
-			Assert.AreEqual(0, response.ResponseColorList.Where(a => a == ResponseColors.Red).Count(), "There should be 0 Red responses.");
-			Assert.AreEqual(0, response.ResponseColorList.Where(a => a == ResponseColors.White).Count(), "There should be 0 White responses.");
-			Assert.AreEqual(4, response.ResponseColorList.Where(a => a == ResponseColors.None).Count(), "There should be 4 None responses.");
+            var colorList = CodeResponseFactory.ToColorList(response);
+            File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_AllNonesShouldBeReturned.txt"), response.ToString());
+			Assert.AreEqual(0, colorList.Where(a => a == ResponseColors.Red).Count(), "There should be 0 Red responses.");
+			Assert.AreEqual(0, colorList.Where(a => a == ResponseColors.White).Count(), "There should be 0 White responses.");
+			Assert.AreEqual(4, colorList.Where(a => a == ResponseColors.None).Count(), "There should be 4 None responses.");
 		}
 
 		[TestMethod]
@@ -47,9 +49,10 @@ namespace Tests {
 			var guess = new Code { One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.White, Four = CodeColors.Yellow };
 
 			var response = CodeTester.Test(guess, answer);
-			File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_GivenAnswerWithTwoRedAndTwoWhite.txt"), response.ToString());
-			Assert.AreEqual(2, response.ResponseColorList.Where(a => a == ResponseColors.Red).Count(), "There should be 2 Red responses.");
-			Assert.AreEqual(2, response.ResponseColorList.Where(a => a == ResponseColors.None).Count(), "There should be 2 None responses.");
+            var colorList = CodeResponseFactory.ToColorList(response);
+            File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_GivenAnswerWithTwoRedAndTwoWhite.txt"), response.ToString());
+			Assert.AreEqual(2, colorList.Where(a => a == ResponseColors.Red).Count(), "There should be 2 Red responses.");
+			Assert.AreEqual(2, colorList.Where(a => a == ResponseColors.None).Count(), "There should be 2 None responses.");
 		}
 
 		[TestMethod]
@@ -58,9 +61,10 @@ namespace Tests {
 			var guess = new Code { One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Red, Four = CodeColors.Purple };
 
 			var response = CodeTester.Test(guess, answer);
-			File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_GivenAnswerWithTwoRedAndTwoWhiteResponses.txt"), response.ToString());
-			Assert.AreEqual(2, response.ResponseColorList.Where(a => a == ResponseColors.Red).Count(), "There should be 2 Red responses.");
-			Assert.AreEqual(2, response.ResponseColorList.Where(a => a == ResponseColors.White).Count(), "There should be 2 White responses.");
+            var colorList = CodeResponseFactory.ToColorList(response);
+            File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_GivenAnswerWithTwoRedAndTwoWhiteResponses.txt"), response.ToString());
+			Assert.AreEqual(2, colorList.Where(a => a == ResponseColors.Red).Count(), "There should be 2 Red responses.");
+			Assert.AreEqual(2, colorList.Where(a => a == ResponseColors.White).Count(), "There should be 2 White responses.");
 		}
 
 		[TestMethod]
@@ -81,9 +85,10 @@ namespace Tests {
 			var answer = new Code { One = CodeColors.Green, Two = CodeColors.Green, Three = CodeColors.Purple, Four = CodeColors.Red };
 			var guess = new Code { One = CodeColors.Orange, Two = CodeColors.Yellow, Three = CodeColors.Green, Four = CodeColors.White };
 			var response = CodeTester.Test(guess, answer);
-			File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_DoesNotReturnMultipleCorrectHitsOnASingularGuess.txt"), response.ToString());
-			Assert.AreEqual(1, response.ResponseColorList.Where(a => a == ResponseColors.White).Count(), "There should be 1 White responses.");
-			Assert.AreEqual(3, response.ResponseColorList.Where(a => a == ResponseColors.None).Count(), "There should be 3 None responses.");
+            var colorList = CodeResponseFactory.ToColorList(response);
+            File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_DoesNotReturnMultipleCorrectHitsOnASingularGuess.txt"), response.ToString());
+            Assert.AreEqual(1, colorList.Where(a => a == ResponseColors.White).Count(), "There should be 1 White responses.");
+			Assert.AreEqual(3, colorList.Where(a => a == ResponseColors.None).Count(), "There should be 3 None responses.");
 		}
 
 		[TestMethod]
@@ -91,10 +96,11 @@ namespace Tests {
 			var answer = new Code { One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Purple, Four = CodeColors.Red };
 			var guess = new Code { One = CodeColors.Green, Two = CodeColors.Red, Three = CodeColors.Yellow, Four = CodeColors.Yellow };
 			var response = CodeTester.Test(guess, answer);
-			File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_ShouldReturnOneRedOneWhiteAndThenTwoNonesInThatOrder.txt"), response.ToString());
-			Assert.AreEqual(1, response.ResponseColorList.Where(a => a == ResponseColors.Red).Count(), "There should be 1 Red responses.");
-			Assert.AreEqual(1, response.ResponseColorList.Where(a => a == ResponseColors.White).Count(), "There should be 1 White responses.");
-			Assert.AreEqual(2, response.ResponseColorList.Where(a => a == ResponseColors.None).Count(), "There should be 2 None responses.");
+            var colorList = CodeResponseFactory.ToColorList(response);
+            File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_ShouldReturnOneRedOneWhiteAndThenTwoNonesInThatOrder.txt"), response.ToString());
+			Assert.AreEqual(1, colorList.Where(a => a == ResponseColors.Red).Count(), "There should be 1 Red responses.");
+			Assert.AreEqual(1, colorList.Where(a => a == ResponseColors.White).Count(), "There should be 1 White responses.");
+			Assert.AreEqual(2, colorList.Where(a => a == ResponseColors.None).Count(), "There should be 2 None responses.");
 		}
 	}
 }
