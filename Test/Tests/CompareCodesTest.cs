@@ -32,8 +32,8 @@ namespace Tests {
 
 		[TestMethod]
 		public void CompareResponses_AllNonesShouldBeReturned() {
-			var answer = new Code { One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Purple, Four = CodeColors.Purple };
-			var guess = new Code { One = CodeColors.Red, Two = CodeColors.Red, Three = CodeColors.Red, Four = CodeColors.Red };
+			var answer = CodeFactory.Create(CodeColors.Green, CodeColors.Orange, CodeColors.Purple, CodeColors.Purple);
+			var guess = CodeFactory.Create(CodeColors.Red, CodeColors.Red, CodeColors.Red, CodeColors.Red);
 
 			var response = CodeTester.Test(guess, answer);
             var colorList = CodeResponseFactory.ToColorList(response);
@@ -45,8 +45,8 @@ namespace Tests {
 
 		[TestMethod]
 		public void CompareResponses_GivenAnswerWithTwoRedAndTwoEmptyResponses() {
-			var answer = new Code { One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Purple, Four = CodeColors.Red };
-			var guess = new Code { One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.White, Four = CodeColors.Yellow };
+			var answer = CodeFactory.Create(CodeColors.Green, CodeColors.Orange, CodeColors.Purple, CodeColors.Red);
+			var guess = CodeFactory.Create(CodeColors.Green, CodeColors.Orange, CodeColors.White, CodeColors.Yellow);
 
 			var response = CodeTester.Test(guess, answer);
             var colorList = CodeResponseFactory.ToColorList(response);
@@ -57,8 +57,8 @@ namespace Tests {
 
 		[TestMethod]
 		public void CompareResponses_GivenAnswerWithTwoRedAndTwoWhiteResponses() {
-			var answer = new Code { One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Purple, Four = CodeColors.Red };
-			var guess = new Code { One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Red, Four = CodeColors.Purple };
+			var answer = CodeFactory.Create(CodeColors.Green, CodeColors.Orange, CodeColors.Purple, CodeColors.Red);
+			var guess = CodeFactory.Create(CodeColors.Green, CodeColors.Orange, CodeColors.Red, CodeColors.Purple);
 
 			var response = CodeTester.Test(guess, answer);
             var colorList = CodeResponseFactory.ToColorList(response);
@@ -82,8 +82,8 @@ namespace Tests {
 
 		[TestMethod]
 		public void CompareResponses_DoesNotReturnMultipleCorrectHitsOnASingularGuess() {
-			var answer = new Code { One = CodeColors.Green, Two = CodeColors.Green, Three = CodeColors.Purple, Four = CodeColors.Red };
-			var guess = new Code { One = CodeColors.Orange, Two = CodeColors.Yellow, Three = CodeColors.Green, Four = CodeColors.White };
+			var answer = CodeFactory.Create(CodeColors.Green, CodeColors.Green, CodeColors.Purple, CodeColors.Red);
+			var guess = CodeFactory.Create(CodeColors.Orange, CodeColors.Yellow, CodeColors.Green, CodeColors.White);
 			var response = CodeTester.Test(guess, answer);
             var colorList = CodeResponseFactory.ToColorList(response);
             File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_DoesNotReturnMultipleCorrectHitsOnASingularGuess.txt"), response.ToString());
@@ -93,8 +93,8 @@ namespace Tests {
 
 		[TestMethod]
 		public void CompareResponses_ShouldReturnOneRedOneWhiteAndThenTwoNonesInThatOrder() {
-			var answer = new Code { One = CodeColors.Green, Two = CodeColors.Orange, Three = CodeColors.Purple, Four = CodeColors.Red };
-			var guess = new Code { One = CodeColors.Green, Two = CodeColors.Red, Three = CodeColors.Yellow, Four = CodeColors.Yellow };
+			var answer = CodeFactory.Create(CodeColors.Green, CodeColors.Orange, CodeColors.Purple, CodeColors.Red);
+			var guess = CodeFactory.Create(CodeColors.Green, CodeColors.Red, CodeColors.Yellow, CodeColors.Yellow);
 			var response = CodeTester.Test(guess, answer);
             var colorList = CodeResponseFactory.ToColorList(response);
             File.WriteAllText(TestUtility.GetPath("Output\\CompareResponses_ShouldReturnOneRedOneWhiteAndThenTwoNonesInThatOrder.txt"), response.ToString());

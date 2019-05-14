@@ -5,6 +5,16 @@ namespace Engine.Factory
 {
     public static class CodeFactory
     {
+        public static Code Create(CodeColors one, CodeColors two, CodeColors three, CodeColors four)
+        {
+            var code = new Code();
+            code.One = one;
+            code.Two = two;
+            code.Three = three;
+            code.Four = four;
+            return code;
+        }
+
         public static Code Create(List<CodeColors> colors)
         {
             var code = new Code();
