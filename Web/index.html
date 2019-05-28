@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <meta charset="UTF-8"> 
+    <link rel="stylesheet" type="text/css" href="css/mastermind.css">
+</head>
+
+<body>
+    <div class="mastermind">
+        <div class="mastermind-board">
+            <h3>MASTERMIND</h3>
+            <input type="radio" name="gametype" value="1">VS Computer</option>
+            <input type="radio" name="gametype" value="2" disabled>VS User</option>
+            <div class="start-button">
+                <a href="#">Start</a>
+            </div>
+
+            <div class="mastermind-row">
+                <div class="pegs">
+                    <div class="peg"></div>
+                    <div class="peg"></div>
+                    <div class="peg"></div>
+                    <div class="peg"></div>
+                </div>
+
+                <div class="marble-crater">
+                    <div class="marble-crater">
+                        <div class="marble empty"></div>
+                    </div>
+                </div>
+
+                <div class="marble-crater">
+                    <div class="marble-crater">
+                        <div class="marble empty"></div>
+                    </div>
+                </div>
+
+                <div class="marble-crater">
+                    <div class="marble-crater">
+                        <div class="marble empty"></div>
+                    </div>
+                </div>
+
+                <div class="marble-crater">
+                    <div class="marble-crater">
+                        <div class="marble empty"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/app/service/GamePlay.js"></script>
+    <script>
+        let gamePlay = new GamePlay();
+
+    </script>
+</body>
+</html>
