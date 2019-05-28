@@ -343,3 +343,6 @@ Tools/CodeGeneratorOutput/Models/Entities/
 TestEmails/
 
 Web/js/
+
+.vs
+.vscode
