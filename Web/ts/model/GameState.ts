@@ -14,7 +14,7 @@ export class GameState {
     public CodeBroken: boolean;
     public GameOver: boolean;
     
-    private _numberOfTurns: number = 12;//can be 12, 10 or 8
+    public NumberOfTurns: number = 12;//can be 12, 10 or 8
     private _code: Code;
     
     set Code(code : Code){
@@ -26,7 +26,7 @@ export class GameState {
     }
 
     Guess(guess: Code): CodeResponse {
-        if (this.Turns.length >= this._numberOfTurns) {
+        if (this.Turns.length >= this.NumberOfTurns) {
             throw this.getGameOverMessage();
         }
         let response = CodeTester.Test(guess, this._code);
@@ -35,7 +35,7 @@ export class GameState {
             this.CodeBroken = true;
             this.GameOver = true;
         }
-        if (this.Turns.length >= this._numberOfTurns) {
+        if (this.Turns.length >= this.NumberOfTurns) {
             this.CodeBroken = false;
             this.GameOver = true;
         }
