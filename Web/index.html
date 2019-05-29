@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/mastermind.css">
 </head>
 
@@ -9,13 +9,51 @@
     <div class="mastermind">
         <div class="mastermind-board">
             <h3>MASTERMIND</h3>
-            <input type="radio" name="gametype" value="1">VS Computer</option>
-            <input type="radio" name="gametype" value="2" disabled>VS User</option>
+            <form id="gameOptions">
+                <input type="radio" name="gametype" value="1" checked> VS Computer
+                <input type="radio" name="gametype" value="2"> VS User
+            </form>
             <div class="start-button">
-                <a href="#">Start</a>
+                <button type="button" id="startButton">Start</button>
             </div>
 
-            <div class="mastermind-row">
+            <div class="mastermind-selection-row">
+                <div class="marble-crater marble-top">
+                    <div class="marble-crater">
+                        <div class="marble empty yellow"></div>
+                    </div>
+                </div>
+                <div class="marble-crater marble-top">
+                    <div class="marble-crater">
+                        <div class="marble empty purple"></div>
+                    </div>
+                </div>
+                <div class="marble-crater marble-top">
+                    <div class="marble-crater">
+                        <div class="marble empty orange"></div>
+                    </div>
+                </div>
+                <div class="marble-crater marble-top">
+                    <div class="marble-crater">
+                        <div class="marble empty red"></div>
+                    </div>
+                </div>
+                <div class="marble-crater marble-top">
+                    <div class="marble-crater">
+                        <div class="marble empty green"></div>
+                    </div>
+                </div>
+                <div class="marble-crater marble-top">
+                    <div class="marble-crater">
+                        <div class="marble empty white"></div>
+                    </div>
+                </div>
+            </div>
+            <br clear="left" />
+
+            <div class="mastermind-row-template hide">
+                <button class='rowGoButton'>Go</button>
+
                 <div class="pegs">
                     <div class="peg"></div>
                     <div class="peg"></div>
@@ -23,36 +61,35 @@
                     <div class="peg"></div>
                 </div>
 
-                <div class="marble-crater">
+                <div class="marble-crater marble-top">
                     <div class="marble-crater">
                         <div class="marble empty"></div>
                     </div>
                 </div>
 
-                <div class="marble-crater">
+                <div class="marble-crater marble-top">
                     <div class="marble-crater">
                         <div class="marble empty"></div>
                     </div>
                 </div>
 
-                <div class="marble-crater">
+                <div class="marble-crater marble-top">
                     <div class="marble-crater">
                         <div class="marble empty"></div>
                     </div>
                 </div>
 
-                <div class="marble-crater">
+                <div class="marble-crater marble-top">
                     <div class="marble-crater">
                         <div class="marble empty"></div>
                     </div>
                 </div>
+                
+                <br clear="left" />
             </div>
         </div>
     </div>
-    <script src="js/app/service/GamePlay.js"></script>
-    <script>
-        let gamePlay = new GamePlay();
-
-    </script>
+    <script src="js/app/bundle.js"></script>
 </body>
+
 </html>
