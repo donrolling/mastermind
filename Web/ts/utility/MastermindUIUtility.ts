@@ -16,8 +16,8 @@ export class MastermindUIUtility {
             board.appendChild(row.cloneNode(true));
         }
         //find the first one and change its name and hide it        
-        let lastChild = document.querySelector(MastermindUIElements.RowClass);
-        lastChild.className = `${MastermindUIElements.RowTemplateClass.replace('.', '')} hide`;
+        let firstChild = document.querySelector(MastermindUIElements.RowClass);
+        firstChild.className = `${MastermindUIElements.RowTemplateClass.replace('.', '')} hide`;
         
         //clean up final row
         MastermindUIUtility.CleanFinalNode(board);
@@ -34,8 +34,8 @@ export class MastermindUIUtility {
     }
 
     public static CleanFinalNode(board: Element) {
-        let rows = board.querySelectorAll(MastermindUIElements.RowClass);
-        let answerRow = rows[rows.length - 1];
+        let answerRow = board.querySelector(MastermindUIElements.RowClass) as HTMLElement;
+        //let answerRow = rows[rows.length - 1];
         let answerRowGoButton = answerRow.querySelector(MastermindUIElements.RowGoButton);
         let answerRowPegs = answerRow.querySelector(MastermindUIElements.PegsClass);
         answerRowGoButton.remove();

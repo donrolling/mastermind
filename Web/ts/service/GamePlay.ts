@@ -21,12 +21,9 @@ export class GamePlay {
     public Init(): void {
         this.resetInitialState();
         this.setupGame();
-        
         MastermindUIUtility.ShowHiddenRow();
         MastermindUIUtility.SetupColorSelector(this._selectedMarble, this._selectionRow);
-
         MastermindUIUtility.CloneRowNode(this._game.NumberOfTurns);
-
         MastermindUIUtility.SetEventsForActiveRow(this._game, this._selectedMarble, this._selectionRow);
     }
 
