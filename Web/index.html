@@ -8,13 +8,15 @@
 <body>
     <div class="mastermind">
         <div class="mastermind-board">
-            <h3>MASTERMIND</h3>
-            <form id="gameOptions">
-                <input type="radio" name="gametype" value="1" checked> VS Computer
-                <input type="radio" name="gametype" value="2"> VS User
-            </form>
-            <div class="start-button">
-                <button type="button" id="startButton">Start</button>
+            <div class="gameControls">
+                <h3>MASTERMIND</h3>
+                <form id="gameOptions">
+                    <input type="radio" name="gametype" value="1" checked> VS Computer
+                    <input type="radio" name="gametype" value="2"> VS User
+                </form>
+                <div class="start-button">
+                    <button type="button" id="startButton">Start</button>
+                </div>
             </div>
 
             <div class="mastermind-selection-row">
@@ -49,47 +51,56 @@
                     </div>
                 </div>
             </div>
-            <br clear="left" />
+            <div class="clear-left"></div>
 
             <div class="mastermind-row-template hide">
-                <button class='rowGoButton'>Go</button>
+                <div class="mastermind-row-container">
 
-                <div class="pegs">
-                    <div class="peg"></div>
-                    <div class="peg"></div>
-                    <div class="peg"></div>
-                    <div class="peg"></div>
-                </div>
+                    <div class="mastermind-row-controls">
+                        <button class='rowGoButton'>Go</button>
 
-                <div class="marble-crater marble-top">
-                    <div class="marble-crater">
-                        <div class="marble empty"></div>
+                        <div class="pegs">
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                        </div>
+
+                        <div class="clear-left"></div>
+                    </div>
+
+                    <div class="mastermind-row-marbles">
+                        <div class="marble-crater marble-top">
+                            <div class="marble-crater">
+                                <div class="marble empty"></div>
+                            </div>
+                        </div>
+
+                        <div class="marble-crater marble-top">
+                            <div class="marble-crater">
+                                <div class="marble empty"></div>
+                            </div>
+                        </div>
+
+                        <div class="marble-crater marble-top">
+                            <div class="marble-crater">
+                                <div class="marble empty"></div>
+                            </div>
+                        </div>
+
+                        <div class="marble-crater marble-top">
+                            <div class="marble-crater">
+                                <div class="marble empty"></div>
+                            </div>
+                        </div>
+
+                        <div class="clear-left"></div>
                     </div>
                 </div>
-
-                <div class="marble-crater marble-top">
-                    <div class="marble-crater">
-                        <div class="marble empty"></div>
-                    </div>
-                </div>
-
-                <div class="marble-crater marble-top">
-                    <div class="marble-crater">
-                        <div class="marble empty"></div>
-                    </div>
-                </div>
-
-                <div class="marble-crater marble-top">
-                    <div class="marble-crater">
-                        <div class="marble empty"></div>
-                    </div>
-                </div>
-                
-                <br clear="left" />
+                <div class="clear-left"></div>
             </div>
         </div>
-    </div>
-    <script src="js/app/bundle.js"></script>
+        <script src="js/app/bundle.js"></script>
 </body>
 
 </html>

@@ -12,7 +12,9 @@ h3, h5 {
   display: block;
   float: left;
 }
-
+.gameControls{
+  margin: 0 0 20px 0;
+}
 .mastermind {
   font-family: "Alegreya Sans SC", Arial;
   min-height: 500px;
@@ -39,12 +41,32 @@ h3, h5 {
 }
 .mastermind-row {
   position: relative;
-  padding: 5px;
+  width: 100%;
+  text-align: center;
+}
+.mastermind-row-container {
+  margin: auto;
+  width: 75%;
+  /* padding: 5px 0; */
+}
+.clear-left{
+  height:0;
+  width:0;
+  clear: left;
+}
+.mastermind-row-controls{
+  width: 80px;
+  padding: 10px 0 0 0;
+  float: left;
+}
+.mastermind-row-marbles{
+  float: left;
 }
 .mastermind-row.current {
   background: #e1d9cd;
 }
 .pegs {
+  margin: 0 10px;
   float: left;
   vertical-align: middle;
 }
