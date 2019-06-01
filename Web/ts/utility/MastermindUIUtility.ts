@@ -5,58 +5,69 @@ import { ResponseColors } from "../enum/ResponseColors";
 import { GameState } from "../model/GameState";
 
 export class MastermindUIUtility {
-
-    public static CloneRowNode(numberOfTurns: number) {
-        let board = document.querySelector(MastermindUIElements.Board);
-        let row = document.querySelector(MastermindUIElements.RowTemplateClass);
-        row.className = MastermindUIElements.RowClass.replace('.', '');
-        //make an extra one for the answer and an extra one for the template
-        let x = numberOfTurns + 1;
-        for (var i = 0; i < x; i++) {
-            board.appendChild(row.cloneNode(true));
+    public static ApplySelectedColorToMarble(event: Event) {
+        let className = (event.target as HTMLElement).className;
+        let colorList = className.split(' ');
+        let color = colorList[colorList.length - 1];
+        let selectedMarble = document.querySelector('.marble-crater div.selected');
+        if(selectedMarble){
+            selectedMarble.className = selectedMarble.className.replace(` ${MastermindUIElements.Selected}`, '');
+            selectedMarble.className += ` ${color}`;
         }
-        //find the first one and change its name and hide it        
-        let firstChild = document.querySelector(MastermindUIElements.RowClass);
-        firstChild.className = `${MastermindUIElements.RowTemplateClass.replace('.', '')} hide`;
-        
-        //clean up final row
-        MastermindUIUtility.CleanFinalNode(board);
     }
 
-    public static MarbleSelect(event: Event, selectedMarble: HTMLElement, selectionRow: HTMLElement) {
+    public static MarbleSelect(event: Event) {
         let selected = event.target as HTMLElement;
         let elementPosition = selected.getBoundingClientRect();
         elementPosition = selected.getBoundingClientRect();
-        selectedMarble = selected;
-        let newPosition = elementPosition.top - 72;
+        let previouslySelected = MastermindUIUtility.getSelectedMarble();
+        if(previouslySelected){
+            previouslySelected.className = previouslySelected.className.replace(` ${MastermindUIElements.Selected}`, '');
+        }
+        selected.className += ` ${MastermindUIElements.Selected}`;
+
+        let newPosition = elementPosition.top - 72;        
+        let selectionRow = MastermindUIUtility.getSelectionRow();
         selectionRow.className = selectionRow.className.replace(' hide', '');
         selectionRow.style.top = `${newPosition}px`;
     }
 
-    public static CleanFinalNode(board: Element) {
-        let answerRow = board.querySelector(MastermindUIElements.RowClass) as HTMLElement;
-        //let answerRow = rows[rows.length - 1];
-        let answerRowGoButton = answerRow.querySelector(MastermindUIElements.RowGoButton);
-        let answerRowPegs = answerRow.querySelector(MastermindUIElements.PegsClass);
-        answerRowGoButton.remove();
-        answerRowPegs.remove();
+    private static getSelectedMarble(): HTMLElement{
+        return document.querySelector('.marble-crater div.selected') as HTMLElement;
     }
-
-    public static ApplySelectedColorToMarble(event: Event, selectedMarble: HTMLElement, selectionRow: HTMLElement) {
-        let className = (event.target as HTMLElement).className;
-        let colorList = className.split(' ');
-        let color = colorList[colorList.length - 1];
-        selectedMarble.className += ` ${color} hide`;
+    
+    private static getSelectionRow(): HTMLElement{
+        return document.querySelector(MastermindUIElements.SelectionRowClass) as HTMLElement;
     }
-
-    public static ShowHiddenRow() {
-        let row = document.querySelector(MastermindUIElements.RowTemplateClass);
-        if (row.className.indexOf(' ') >= 0) {
-            row.className = row.className.split(' ')[0];
+    
+    public static SetupColorSelector() {
+        let coloredMarblesSelector = `${MastermindUIElements.SelectionRowClass} ${MastermindUIElements.MarbleTopClass}`;
+        let coloredMarbles = document.querySelectorAll(coloredMarblesSelector);
+        for (var i = 0; i < coloredMarbles.length; i++) {
+            coloredMarbles[i].addEventListener(MastermindUIElements.Click, function (event) {
+                MastermindUIUtility.ApplySelectedColorToMarble(event);
+            });
         }
     }
 
-    public static SubmitRow(event: Event, game: GameState, selectedMarble: HTMLElement, selectionRow: HTMLElement) {
+    public static SetEventsForActiveRow(game: GameState): void {
+        let self = this;
+        let activeRow: number = game.Turns.length + 1;
+        let marbleRows = MastermindUIElements.RowClass;
+        let activeMarbleRow = document.querySelectorAll(marbleRows)[activeRow];
+        let rowGoButton = document.querySelectorAll(`${MastermindUIElements.RowClass} ${MastermindUIElements.RowGoButton}`)[activeRow];
+        rowGoButton.addEventListener(MastermindUIElements.Click, function(event){
+            MastermindUIUtility.SubmitRow(event, game);
+        });
+        let activeMarbles = activeMarbleRow.querySelectorAll(MastermindUIElements.MarbleTopClass);
+        for (var i = 0; i < activeMarbles.length; i++) {
+            activeMarbles[i].addEventListener(MastermindUIElements.Click, function (event) {
+                MastermindUIUtility.MarbleSelect(event);
+            });
+        }
+    }
+
+    public static SubmitRow(event: Event, game: GameState) {
         let self = this;
         let btn = event.target as HTMLElement;
         let parentRow = btn.parentElement as HTMLElement;
@@ -99,52 +110,6 @@ export class MastermindUIUtility {
             return;
         }
 
-        MastermindUIUtility.SetEventsForActiveRow(game, selectedMarble, selectionRow);
-    }
-
-    
-
-    public static GetRadioVal(formId: string, name: string): string {
-        let form = document.getElementById(formId) as HTMLFormElement;
-        // get list of radio buttons with specified name
-        let radios = form.elements[name];
-        for (let i = 0; i < radios.length; i++) {
-            if (radios[i].checked) {
-                return radios[i].value;
-            }
-        }
-        return '';
-    }
-    
-    
-    public static SetupColorSelector(selectedMarble: HTMLElement, selectionRow: HTMLElement) {
-        let coloredMarblesSelector = `${MastermindUIElements.SelectionRowClass} ${MastermindUIElements.MarbleTopClass}`;
-        let coloredMarbles = document.querySelectorAll(coloredMarblesSelector);
-        for (var i = 0; i < coloredMarbles.length; i++) {
-            coloredMarbles[i].addEventListener(MastermindUIElements.Click, function (event) {
-                MastermindUIUtility.ApplySelectedColorToMarble(event, selectedMarble, selectionRow);
-            });
-        }
-    }
-
-    public static SetEventsForActiveRow(
-        game: GameState, 
-        selectedMarble: HTMLElement, 
-        selectionRow: HTMLElement
-    ): void {
-        let self = this;
-        let activeRow: number = game.Turns.length; 
-        let marbleRows = MastermindUIElements.RowClass;
-        let activeMarbleRow = document.querySelectorAll(marbleRows)[activeRow];
-        let rowGoButton = activeMarbleRow.querySelector(MastermindUIElements.RowGoButton);
-        rowGoButton.addEventListener(MastermindUIElements.Click, function(event){
-            MastermindUIUtility.SubmitRow(event, game, selectedMarble, selectionRow);
-        });
-        let activeMarbles = activeMarbleRow.querySelectorAll(MastermindUIElements.MarbleTopClass);
-        for (var i = 0; i < activeMarbles.length; i++) {
-            activeMarbles[i].addEventListener(MastermindUIElements.Click, function (event) {
-                MastermindUIUtility.MarbleSelect(event, selectedMarble, selectionRow);
-            });
-        }
+        MastermindUIUtility.SetEventsForActiveRow(game);
     }
 }

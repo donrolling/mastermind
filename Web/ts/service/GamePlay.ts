@@ -6,12 +6,12 @@ import { Code } from "../model/Code";
 import { GameState } from "../model/GameState";
 import { MastermindUIElements } from "../utility/MastermindUIElements";
 import { MastermindUIUtility } from "../utility/MastermindUIUtility";
+import { DisplayUtility } from "../utility/DisplayUtility";
+import { FormUtility } from "../utility/FormUtility";
 
 export class GamePlay {
     private _gameMode: number;
     private _game: GameState;
-    private _selectedMarble: HTMLElement;
-    private _selectionRow: HTMLElement;
 
     constructor() {
         let startButton = document.getElementById(MastermindUIElements.StartButton);
@@ -21,15 +21,14 @@ export class GamePlay {
     public Init(): void {
         this.resetInitialState();
         this.setupGame();
-        MastermindUIUtility.ShowHiddenRow();
-        MastermindUIUtility.SetupColorSelector(this._selectedMarble, this._selectionRow);
-        MastermindUIUtility.CloneRowNode(this._game.NumberOfTurns);
-        MastermindUIUtility.SetEventsForActiveRow(this._game, this._selectedMarble, this._selectionRow);
+        DisplayUtility.ShowHiddenRow();
+        MastermindUIUtility.SetupColorSelector();
+        DisplayUtility.CloneRowNode(this._game.NumberOfTurns);
+        MastermindUIUtility.SetEventsForActiveRow(this._game);
     }
 
     private setupGame() {
-        this._selectionRow = document.querySelector(MastermindUIElements.SelectionRowClass) as HTMLElement;
-        let gameMode = MastermindUIUtility.GetRadioVal(MastermindUIElements.GameOptionsForm, MastermindUIElements.GameTypeRadioButtons);
+        let gameMode = FormUtility.GetRadioVal(MastermindUIElements.GameOptionsForm, MastermindUIElements.GameTypeRadioButtons);
         this._gameMode = parseInt(gameMode);
 
         if (this._gameMode === 1) {
