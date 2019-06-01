@@ -4,6 +4,7 @@ export class MastermindUIElements {
     public static GameOptionsForm: string = 'gameOptions';
     public static GameTypeRadioButtons: string = 'gametype';
     public static MarbleTopClass: string = '.marble-top';
+    public static MarbleBottomClass: string = '.marble-bottom';
     public static PegClass: string = '.peg';
     public static PegsClass: string = '.pegs';
     public static Red: string = 'red';
