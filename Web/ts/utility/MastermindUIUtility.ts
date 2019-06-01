@@ -12,7 +12,7 @@ export class MastermindUIUtility {
         let selectedMarble = document.querySelector('.marble.empty.selected');
         if(selectedMarble){
             selectedMarble.className = selectedMarble.className.replace(` ${MastermindUIElements.Selected}`, '');
-            selectedMarble.className += ` ${color}`;
+            selectedMarble.className += ` ${color} colored`;
         }
         let selectionRow = MastermindUIUtility.getSelectionRow();
         selectionRow.className += ' hide';
@@ -63,17 +63,17 @@ export class MastermindUIUtility {
         let activeMarbleRow = document.querySelectorAll(marbleRows)[activeRow];
         let rowGoButtons = document.querySelectorAll(`${MastermindUIElements.RowClass} ${MastermindUIElements.RowGoButton}`);
         for(var i = 0;i < rowGoButtons.length;i++){
-            let b = rowGoButtons[i];
-            if(i === activeRow){
-                b.className = b.className.replace(' hide', '');
+            let rowGoButton = rowGoButtons[i];
+            if(i === activeRow - 1){
+                rowGoButton.className = rowGoButton.className.replace(' hide', '');
+                rowGoButton.addEventListener(MastermindUIElements.Click, function(event){
+                    console.log('test');
+                    MastermindUIUtility.SubmitRow(event, game);
+                });
             } else {
-                b.className += ' hide';
+                rowGoButton.className += ' hide';
             }
         }
-        let rowGoButton = rowGoButtons[activeRow];
-        rowGoButton.addEventListener(MastermindUIElements.Click, function(event){
-            MastermindUIUtility.SubmitRow(event, game);
-        });
         let activeMarbles = activeMarbleRow.querySelectorAll('.marble.empty');
         for (var i = 0; i < activeMarbles.length; i++) {
             activeMarbles[i].addEventListener(MastermindUIElements.Click, function (event) {
@@ -85,14 +85,21 @@ export class MastermindUIUtility {
     public static SubmitRow(event: Event, game: GameState) {
         let self = this;
         let btn = event.target as HTMLElement;
-        let parentRow = btn.parentElement as HTMLElement;
-        let activeMarbles = parentRow.querySelectorAll(MastermindUIElements.MarbleTopClass);
+        let parentRow = btn.parentElement.parentElement as HTMLElement;
+        let coloredMarbles = parentRow.querySelectorAll('.colored');
         
         let colors: CodeColors[] = [];
-        for (var i = 0; i < activeMarbles.length; i++) {
-            var marble = activeMarbles[i] as HTMLElement;
+        console.log(coloredMarbles.length);
+        if(coloredMarbles.length < 4){
+            alert('you have to chose colors for each marble before proceeding.');
+            return;
+        }
+        for (var i = 0; i < coloredMarbles.length; i++) {
+            var marble = coloredMarbles[i] as HTMLElement;
             console.log(marble.className);
-            colors.push(CodeColors.Green);
+            let cs = marble.className.split(' ');
+            let color = CodeColors[cs[3]];
+            colors.push(color);
         }
 
         let guess = CodeFactory.CreateFromList(colors);

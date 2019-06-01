@@ -6,7 +6,7 @@ h3, h5 {
   margin: 5px 0;
 }
 .hide{
-  display: none;  
+  display: none !important;
 }
 .rowGoButton{
   display: block;
